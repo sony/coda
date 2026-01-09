@@ -1,0 +1,56 @@
+defaults:
+  - _self_
+  - pipeline: pipeline
+  - dataset: voc
+
+trainer:
+  n_workers: 8
+  batch_size: 32
+  total_steps: 500001
+  lr_warmup_steps: 2500
+
+  gradient_accumulation_steps: 1
+
+  tracker_project_name: "slot_diffusion"
+  tracker_project_run_name: "coda"
+  entity: "your-wandb"
+  log_with: "tensorboard"
+
+  # whether or not to use mixed precision training
+  mixed_precision: "fp16" # ["no", "fp32", "fp16", "fp8", "bf16"]
+
+  clip_grad_norm: 1.0
+
+  # run evaluation after `check_model_every` iterations
+  check_model_every: 20000
+
+  # monitor the output after `print_output_every` iterations
+  print_output_every:  500
+
+  save_last_epoch: true
+
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 2e-5
+    betas: [0.9, 0.999]
+    weight_decay: 0.01
+
+  lr_scheduler: "constant_with_warmup"
+
+  n_samples_fid: 5000
+
+
+# seed for random number generators
+seed: 1234
+
+
+# working diectory
+work_dir: ${hydra:runtime.cwd}
+
+# hydra configuration
+hydra:
+  run:
+    dir: output/temp/
+  sweep:
+    dir: outputs/multiruns/${now:%Y-%m-%d_%H-%M-%S}
+    subdir: ${hydra.job.num}

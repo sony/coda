@@ -1,0 +1,27 @@
+name: coco
+
+train:
+  _target_: experiment.dataset.data.GlobDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}/images/train2017
+  img_size: 512
+  data_portion: [0, 1]
+  img_ext: ".jpg"
+  rng_seed: ${seed}
+  random_flip: true
+
+valid:
+  _target_: experiment.dataset.data.GlobDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}/images/val2017
+  img_size: 512
+  data_portion: [0, 1]
+  img_ext: ".jpg"
+  rng_seed: ${seed}
+  random_flip: true
+
+test:
+  _target_: experiment.dataset.coco.COCO2017Dataset
+  data_root: ${oc.env:USER_DATA}/${dataset.name}
+  split: val
+  img_size: 512
+  load_annotation: true
+  load_sem_mask: true

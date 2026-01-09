@@ -1,0 +1,28 @@
+name: voc
+
+train:
+  _target_: experiment.dataset.data.GlobDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}/images/
+  metafile: ${oc.env:USER_DATA}/${dataset.name}/sets/trainaug.txt 
+  img_size: 512
+  data_portion: [0, 1]
+  img_ext: ".jpg"
+  rng_seed: ${seed}
+  random_flip: true
+
+valid:
+  _target_: experiment.dataset.data.GlobDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}/images/
+  metafile: ${oc.env:USER_DATA}/${dataset.name}/sets/val.txt
+  img_size: 512
+  data_portion: [0, 1]
+  img_ext: ".jpg"
+  rng_seed: ${seed}
+  random_flip: true
+
+test:
+  _target_: experiment.dataset.voc.VOC12Dataset
+  data_root: ${oc.env:USER_DATA}/${dataset.name}
+  split: val
+  img_size: 512
+  load_annotation: true

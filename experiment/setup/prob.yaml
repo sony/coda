@@ -1,0 +1,27 @@
+defaults:
+  - _self_
+  - dataset: voc
+
+model_path: null
+
+batch_size: 32
+n_workers: 8
+
+n_samples_fid: 1000
+seed: 1234
+sample_size: 32
+
+# The portion of the training data (in the testing slots) 
+# to use for attribute prediction tasks.
+train_portion: 0.83
+
+# working diectory
+work_dir: ${hydra:runtime.cwd}
+
+# hydra configuration
+hydra:
+  run:
+    dir: output/temp/
+  sweep:
+    dir: outputs/multiruns/${now:%Y-%m-%d_%H-%M-%S}
+    subdir: ${hydra.job.num}

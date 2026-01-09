@@ -1,0 +1,28 @@
+_target_: src.model.pipeline.DiffusionPipeline
+
+defaults:
+  - encoder: lsd_register
+
+model_id: "stable-diffusion-v1-5/stable-diffusion-v1-5"
+
+scheduler_train: DDPMScheduler
+scheduler_test: DDIMScheduler
+
+inference_steps: 50
+guidance_scale: 7.5
+
+enable_xformers: false
+
+training_unet_cross_attention: true
+training_unet: false
+
+trainable_keys: [".attn2.to_k.", ".attn2.to_v.", ".attn2.to_out."]
+
+cross_attention_dim: 768
+mixed_precision: ${trainer.mixed_precision}
+
+cfg_dropping_rate: 0.1
+
+contrastive_weight: 0.05
+contrastive_sampling_rate: 0.5
+contrastive_warmup: 20000

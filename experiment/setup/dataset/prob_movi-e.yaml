@@ -1,0 +1,11 @@
+name: movi-e
+
+test:
+  _target_: experiment.dataset.MOViDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}
+  img_size: 512
+  split: validation
+  random_flip: false
+  read_labels: true
+  max_num_obj: 23
+  keys_to_log: ["category", "image_positions", "bboxes_3d"]

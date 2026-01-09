@@ -1,0 +1,21 @@
+name: movi-e
+train:
+  _target_: experiment.dataset.MOViDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}
+  img_size: 512
+  split: train
+  random_flip: true
+
+valid:
+  _target_: experiment.dataset.MOViDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}
+  img_size: 512
+  split: validation
+  random_flip: false
+
+test:
+  _target_: experiment.dataset.MOViDataset
+  root: ${oc.env:USER_DATA}/${dataset.name}
+  img_size: 512
+  split: validation
+  random_flip: false

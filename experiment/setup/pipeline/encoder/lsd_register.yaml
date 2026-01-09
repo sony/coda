@@ -1,0 +1,26 @@
+
+_target_: src.model.encoder.RegisterSlotDiffusion
+
+model_id: ${pipeline.model_id}
+
+dino_id: dinov2_vitb14
+dino_requires_grad: false
+dino_sample_size: 32
+dino_out_channels: 768
+
+slot_n_iterations: 3
+slot_n_slots: 7
+slot_n_heads: 1
+slot_out_channels: ${pipeline.cross_attention_dim}
+slot_size: 768
+slot_mlp_hidden_size: 768
+slot_epsilon: 1.0e-06
+slot_learnable_slot_init: false
+slot_bi_level: false
+
+# one of the values [-1, 0, >0], where -1 means using frozen embeddings of null token <"">
+# 0: learnable negative embedding
+# >0: padding tokens to the end of slots
+num_registers: -1
+
+dino_enable_register: false
