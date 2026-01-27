@@ -137,11 +137,11 @@ where `dataset` can be one of [`voc`, `coco`, `movi-c`, `movi-e`].
 Please cite our paper if you find it useful in your research:
 
 ```
-@article{nguyen2026coda,
+@inproceedings{nguyen2026coda,
   title={Improved Object-Centric Diffusion Learning with Registers and Contrastive Alignment}, 
   author={Bac Nguyen and Yuhta Takida and Naoki Murata and Chieh-Hsin Lai and Toshimitsu Uesaka and Stefano Ermon and Yuki Mitsufuji},
   year={2026},
-  journal={arXiv 2601.01224},
+  booktitle={The Fourteenth International Conference on Learning Representations},
 }
 ```
 
